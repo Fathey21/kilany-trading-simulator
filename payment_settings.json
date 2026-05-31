@@ -1,0 +1,19 @@
+{
+  "methods": [
+    {
+      "id": "vodafone_cash",
+      "name": "فودافون كاش (Vodafone Cash)",
+      "details": "رقم فودافون كاش المسجل: 01095018521"
+    },
+    {
+      "id": "instapay",
+      "name": "انستا باي (InstaPay)",
+      "details": "رقم انستا باي المعتمد: 01095018521@instapay"
+    }
+  ],
+  "prices": {
+    "basics": 450,
+    "analysis": 650,
+    "risk-management": 850
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "أكاديمية الكيلاني للتداول الذكي",
+  "description": "منصة تعليمية متكاملة لتعليم التداول مع محاكي تداول تفاعلي ومساعد ذكاء اصطناعي مع إمكانية تثبيت التطبيق على الأجهزة",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
