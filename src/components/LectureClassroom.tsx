@@ -502,7 +502,14 @@ export function LectureClassroom() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ passcode: token })
         });
-        setHasAdminSecret(response.ok);
+        if (response.ok) {
+          setHasAdminSecret(true);
+        } else if (response.status === 404) {
+          // Fallback for static hosts (Netlify)
+          setHasAdminSecret(token === "1112002" || token === "kilany2026");
+        } else {
+          setHasAdminSecret(false);
+        }
       } catch (err) {
         setHasAdminSecret(token === "1112002" || token === "kilany2026");
       }
@@ -2323,11 +2330,28 @@ export function LectureClassroom() {
                       window.dispatchEvent(new Event("admin-token-changed"));
                       setShowTeacherLoginModal(false);
                       setTeacherPasscodeInput("");
+                    } else if (res.status === 404 && (teacherPasscodeInput === "1112002" || teacherPasscodeInput === "kilany2026")) {
+                      localStorage.setItem("kilany_admin_token", teacherPasscodeInput);
+                      setHasAdminSecret(true);
+                      setIsAdminMode(true);
+                      window.dispatchEvent(new Event("admin-token-changed"));
+                      setShowTeacherLoginModal(false);
+                      setTeacherPasscodeInput("");
+                      alert("تم تفعيل صلاحية المعلم محليّاً! 🎓");
                     } else {
                       setTeacherLoginError("رمز المرور المعتمد لكبار المعلمين غير صحيح!");
                     }
                   }).catch(() => {
-                    setTeacherLoginError("خطأ في الاتصال بالسيرفر.");
+                    if (teacherPasscodeInput === "1112002" || teacherPasscodeInput === "kilany2026") {
+                      localStorage.setItem("kilany_admin_token", teacherPasscodeInput);
+                      setHasAdminSecret(true);
+                      setIsAdminMode(true);
+                      window.dispatchEvent(new Event("admin-token-changed"));
+                      setShowTeacherLoginModal(false);
+                      setTeacherPasscodeInput("");
+                    } else {
+                      setTeacherLoginError("خطأ في الاتصال بالسيرفر.");
+                    }
                   });
                 }
               }}
@@ -2353,11 +2377,28 @@ export function LectureClassroom() {
                       window.dispatchEvent(new Event("admin-token-changed"));
                       setShowTeacherLoginModal(false);
                       setTeacherPasscodeInput("");
+                    } else if (res.status === 404 && (teacherPasscodeInput === "1112002" || teacherPasscodeInput === "kilany2026")) {
+                      localStorage.setItem("kilany_admin_token", teacherPasscodeInput);
+                      setHasAdminSecret(true);
+                      setIsAdminMode(true);
+                      window.dispatchEvent(new Event("admin-token-changed"));
+                      setShowTeacherLoginModal(false);
+                      setTeacherPasscodeInput("");
+                      alert("تم تفعيل صلاحية المعلم محليّاً! 🎓");
                     } else {
                       setTeacherLoginError("رمز المرور المعتمد لكبار المعلمين غير صحيح!");
                     }
                   }).catch(() => {
-                    setTeacherLoginError("خطأ في الاتصال بالسيرفر.");
+                    if (teacherPasscodeInput === "1112002" || teacherPasscodeInput === "kilany2026") {
+                      localStorage.setItem("kilany_admin_token", teacherPasscodeInput);
+                      setHasAdminSecret(true);
+                      setIsAdminMode(true);
+                      window.dispatchEvent(new Event("admin-token-changed"));
+                      setShowTeacherLoginModal(false);
+                      setTeacherPasscodeInput("");
+                    } else {
+                      setTeacherLoginError("خطأ في الاتصال بالسيرفر.");
+                    }
                   });
                 }}
                 className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl transition-all cursor-pointer text-center"
